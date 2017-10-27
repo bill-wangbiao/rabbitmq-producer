@@ -16,8 +16,11 @@ public class MqProducerTest {
 
 		channel.queueDeclare(QUEUE_NAME, false, false, false, null);
 		String message = "Hello World!";
-		channel.basicPublish("", QUEUE_NAME, null, message.getBytes("UTF-8"));
-		System.out.println(" [x] Sent '" + message + "'");
+		for(int i=0;i<10;i++) {
+			channel.basicPublish("", QUEUE_NAME, null, (message+i).getBytes("UTF-8"));
+		}
+		
+		System.out.println("发送完成"+message);
 
 		channel.close();
 		connection.close();
