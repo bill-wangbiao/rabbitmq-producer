@@ -3,7 +3,15 @@ package com.bill.test.mq;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
-
+/**
+ * 消息producer发布订阅：
+ * 1、交换器的使用，规则有：直连，主题，分发，标题
+ * 2、临时队列
+ * 3、绑定
+ * 
+ * @author sara
+ *
+ */
 public class EmitLog {
 	private static final String EXCHANGE_NAME = "logs";
 

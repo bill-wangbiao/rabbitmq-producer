@@ -5,7 +5,15 @@ import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.MessageProperties;
-
+/**
+ * 工作队列producer：
+ * 1、消息持久化
+ * 2、匿名交换器
+ * 3、消息确认
+ * 4、负载均衡
+ * @author sara
+ *
+ */
 public class MqProducerTest {
 	private final static String QUEUE_NAME = "hello01";
 	private final static String EXCHANGE_NAME="";
@@ -18,6 +26,8 @@ public class MqProducerTest {
 		/**消息持久化：durable和下面的MessageProperties.PERSISTENT_TEXT_PLAIN配置
 		 * 作用：保证消息在mqserver宕机的情况下，消息不丢失；
 		 * 实现原理：把消息保存在磁盘上，记住消息的状态和内容**/
+		int prefetchCount=1;//设置不要把多个消息发送给一个消费者
+		channel.basicQos(prefetchCount);
 		boolean durable=true;
 		channel.queueDeclare(QUEUE_NAME, durable, false, false, null);
 		
